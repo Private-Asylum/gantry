@@ -5,18 +5,18 @@ Documentation site for the Gantry plugin, served at
 `Private-Asylum.github.io`. Static HTML rendered with Dioxus and styled by
 Yeti, built by the `pvas-docs` binary from the
 [pvas-web-shared](https://github.com/Private-Asylum/pvas-web-shared)
-submodule. No Node in the build; Pagefind indexes the result for search.
+submodule, which also runs Pagefind (through `npx`, so Node must be
+installed) to index the result for search.
 
 ```bash
 git clone --recurse-submodules git@github.com:Private-Asylum/gantry.git
-cargo docs                 # renders into public/
-cargo docs serve           # renders, then previews at http://127.0.0.1:8080/
-npx pagefind --site public # optional: build the search index locally
+cargo docs                 # renders and indexes into public/
+cargo docs serve           # the same, then previews at http://127.0.0.1:8080/gantry/
 ```
 
 `cargo docs` is an alias (`.cargo/config.toml`) for running `pvas-docs` from
-the submodule. The preview serves the site at the root; deployed, it lives
-under `/gantry/`.
+the submodule. The preview serves the site under `/gantry/`, as Pages does,
+so every link and search works locally.
 
 ## What is where
 
@@ -53,5 +53,5 @@ Review the manifest diff, then commit.
   docs (GitHub does not redirect project sites).
 - No `CNAME`: the domain belongs to the org site and is inherited by path.
 - Pages source must be **GitHub Actions**. CI checks out the submodule and full
-  history (for "Last updated" dates), renders with `--locked`, then runs
-  Pagefind.
+  history (for "Last updated" dates), renders and indexes with
+  `--locked`.

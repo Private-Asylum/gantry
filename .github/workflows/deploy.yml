@@ -7,7 +7,7 @@ on:
 
 # The site is rendered from data/manifest.json (written by PVAS-DocGen locally, since it needs the
 # engine and the plugin source, and committed) and content/ by the pvas-docs binary from the
-# pvas-web-shared submodule. Pagefind then indexes the built pages for search.
+# pvas-web-shared submodule, which also indexes the built pages for search with Pagefind (via npx).
 permissions:
   contents: read
   pages: write
@@ -31,7 +31,6 @@ jobs:
           workspaces: Crates/pvas-web-shared
       - uses: actions/configure-pages@v6
       - run: cargo run --locked --release --manifest-path Crates/pvas-web-shared/Cargo.toml -p pvas-docs -- --out public
-      - run: npx --yes pagefind@1.5.2 --site public
       - uses: actions/upload-pages-artifact@v5
         with:
           path: public
