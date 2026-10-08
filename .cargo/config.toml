@@ -1,0 +1,5 @@
+[alias]
+# Build or preview this site with the pvas-docs binary from the pvas-web-shared submodule:
+#   cargo docs [build] [--out <dir>]
+#   cargo docs serve [--port <port>]
+docs = "run --release --quiet --manifest-path Crates/pvas-web-shared/Cargo.toml -p pvas-docs --"

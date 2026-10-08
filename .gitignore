@@ -1,0 +1,10 @@
+# The rendered site, and Pagefind's index over it. Built in CI; never committed.
+/public/
+
+# Editor / OS
+.vscode/
+.idea/
+*.code-workspace
+.DS_Store
+Thumbs.db
+*~

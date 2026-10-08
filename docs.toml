@@ -1,0 +1,47 @@
+# Gantry's documentation site. Built by pvas-docs from the pvas-web-shared submodule:
+#   cargo docs           # renders into public/
+#   cargo docs serve     # renders, then previews at http://127.0.0.1:8080/
+
+[site]
+title = "Gantry"
+slug = "gantry"
+description = "Experience trees, staged activation and load instrumentation for Unreal Engine."
+origin = "https://privateasylum.com"
+repository = "https://github.com/Private-Asylum/gantry"
+manifest = "data/manifest.json"
+content = "content"
+styles = "styles"
+
+[[nav]]
+label = "Private Asylum"
+href = "https://privateasylum.com/"
+
+[sidebar]
+groups = ["Getting Started", "Guides"]
+
+[home]
+headline = "Content that knows its order."
+lede = "Experiences composed into a declared dependency tree, activated in observable stages, with game feature plugins reference counted across swaps. Shipped content and mods travel the same path, and every load is a named scope you can watch."
+
+[[home.actions]]
+label = "Start here"
+href = "/getting-started/"
+
+[[home.actions]]
+label = "Browse the reference"
+href = "/reference/"
+
+[[home.cards]]
+title = "Getting started"
+text = "Install from Fab, wire up the asset manager and game feature policy, and author your base experience."
+href = "/getting-started/"
+
+[[home.cards]]
+title = "Concepts"
+text = "How the experience tree, staged activation and load scopes fit together."
+href = "/concepts/"
+
+[[home.cards]]
+title = "Reference"
+text = "Every type, Blueprint node and C++ member, with pins, defaults and categories as the editor shows them."
+href = "/reference/"

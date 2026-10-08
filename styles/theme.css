@@ -1,0 +1,14 @@
+/* Gantry's Yeti theme: token values only, loaded after Yeti and the shared
+   docs stylesheet. The full list of tokens, with defaults, is in
+   Crates/pvas-web-shared/Crates/assets/vendor/yeti/starter/theme.css. */
+
+@layer yeti.reset, yeti.base, yeti.theme, yeti.layouts, yeti.components, yeti.utilities;
+
+:root {
+	/* Amber load on a steel frame, from the plugin's icon. */
+	--yeti-hue-primary: 70;
+	--yeti-hue-secondary: 250;
+	--yeti-hue-neutral: 250;
+	--yeti-chroma: 0.13;
+	--yeti-tracking-heading: -0.02em;
+}

@@ -1,0 +1,47 @@
+name: Deploy docs to Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# The site is rendered from data/manifest.json (written by PVAS-DocGen locally, since it needs the
+# engine and the plugin source, and committed) and content/ by the pvas-docs binary from the
+# pvas-web-shared submodule. Pagefind then indexes the built pages for search.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          submodules: true   # pvas-web-shared is built from the pinned submodule commit
+          fetch-depth: 0     # "Last updated" dates come from git history
+      - run: rustup toolchain install   # reads rust-toolchain.toml
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: Crates/pvas-web-shared
+      - uses: actions/configure-pages@v6
+      - run: cargo run --locked --release --manifest-path Crates/pvas-web-shared/Cargo.toml -p pvas-docs -- --out public
+      - run: npx --yes pagefind@1.5.2 --site public
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
